@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@aesop-fables/containr@^0.2.0":
+"@aesop-fables/containr@^0.2.1":
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/@aesop-fables/containr/-/containr-0.2.1.tgz#448b6518dfba65a1cecc595340d3dc53c6b96875"
   integrity sha512-4yjgKxtn/lQ+S4RhBRrDtjKUYYtDfj+A5EyvKKZY1qp1YNPHdr4UtZ4t7YBEi6IJ7QbA0DlzvPTw1yP12eZZWg==
@@ -580,7 +580,7 @@
     "@aws-sdk/util-utf8" "3.254.0"
     tslib "^2.3.1"
 
-"@aws-sdk/smithy-client@3.267.0":
+"@aws-sdk/smithy-client@3.267.0", "@aws-sdk/smithy-client@^3.0.0":
   version "3.267.0"
   resolved "https://registry.yarnpkg.com/@aws-sdk/smithy-client/-/smithy-client-3.267.0.tgz#a3148a49900e284c3c140a5b7514e20e6d4342ae"
   integrity sha512-WdgXHqKmFQIkAWETO/I5boX9u6QbMLC4X74OVSBaBLhRjqYmvolMFtNrQzvSKGB3FaxAN9Do41amC0mGoeLC8A==
@@ -600,7 +600,7 @@
     "@aws-sdk/types" "3.267.0"
     tslib "^2.3.1"
 
-"@aws-sdk/types@3.267.0", "@aws-sdk/types@^3.222.0":
+"@aws-sdk/types@3.267.0", "@aws-sdk/types@^3.0.0", "@aws-sdk/types@^3.222.0":
   version "3.267.0"
   resolved "https://registry.yarnpkg.com/@aws-sdk/types/-/types-3.267.0.tgz#fe543d1a1977c4e9e7ca6c32c837fcfd87b32441"
   integrity sha512-fICTbSeIfXlTHnciQgDt37R0kXoKxgh0a3prnLWVvTcmf7NFujdZmg5YTAZT3KJJ7SuKsIgnI8azBYioVY8BVQ==
