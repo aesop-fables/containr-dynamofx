@@ -3,9 +3,10 @@ import { DynamoDB, DynamoDBClientConfig } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, TranslateConfig } from '@aws-sdk/lib-dynamodb';
 import { DynamoFactory } from './DynamoFactory';
 import { DynamoServices } from './DynamoServices';
+import { IDynamoOperation } from './IDynamoOperation';
 import { DynamoService, IDynamoService } from './IDynamoService';
 
-export { IDynamoService, DynamoService, DynamoFactory, DynamoServices };
+export { IDynamoOperation, IDynamoService, DynamoService, DynamoFactory, DynamoServices };
 
 export interface UseDynamoConfiguration {
   core?: DynamoDBClientConfig;
