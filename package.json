@@ -48,7 +48,6 @@
   },
   "peerDependencies": {
     "@aesop-fables/containr": "0.2.x",
-    "@aws-sdk/lib-dynamodb": "3.x",
     "@types/aws-lambda": "8.x",
     "@aws-sdk/smithy-client": "3.x",
     "@aws-sdk/types": "3.x",
