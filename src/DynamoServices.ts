@@ -1,5 +1,5 @@
 export const DynamoServices = {
   Client: 'dynamoClient',
-  DocClient: 'dynamoClient',
+  DocClient: 'dynamoDocClient',
   Service: 'dynamoService',
 };
