@@ -1,6 +1,6 @@
 {
   "name": "@aesop-fables/containr-dynamofx",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A collection of services and utilities to make DynamoDb development easier",
   "type": "commonjs",
   "exports": {
@@ -27,7 +27,6 @@
   },
   "devDependencies": {
     "@aesop-fables/containr": "^0.2.1",
-    "@aws-sdk/client-dynamodb": "^3.267.0",
     "@aws-sdk/lib-dynamodb": "^3.267.0",
     "@types/aws-lambda": "^8.10.110",
     "@aws-sdk/smithy-client": "^3.0.0",
@@ -50,7 +49,6 @@
   },
   "peerDependencies": {
     "@aesop-fables/containr": "0.2.x",
-    "@aws-sdk/client-dynamodb": "3.x",
     "@aws-sdk/lib-dynamodb": "3.x",
     "@types/aws-lambda": "8.x",
     "@aws-sdk/smithy-client": "3.x",
