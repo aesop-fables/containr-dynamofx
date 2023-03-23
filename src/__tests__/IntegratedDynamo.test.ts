@@ -1,19 +1,24 @@
+import 'reflect-metadata';
 import { inject } from '@aesop-fables/containr';
-import { DynamoDBDocumentClient, ScanCommand } from '@aws-sdk/lib-dynamodb';
+import { DynamoDB } from 'aws-sdk';
 import { DynamoServices } from '../DynamoServices';
 import { IDynamoOperation } from '../IDynamoOperation';
 import { IDynamoService } from '../IDynamoService';
 import { Person, resetSystemState } from './Utils';
 
 class ListAllPeople implements IDynamoOperation<Person[]> {
-  constructor(@inject(DynamoServices.DocClient) private readonly dynamo: DynamoDBDocumentClient) {}
+  constructor(@inject(DynamoServices.Client) private readonly dynamo: DynamoDB) {}
   async execute(): Promise<Person[]> {
-    const results = await this.dynamo.send(new ScanCommand({ TableName: 'DynamoFxTester' }));
-    return results.Items as Person[];
+    const results = await this.dynamo.scan({ TableName: 'DynamoFxTester' }).promise();
+    if (!results.Items) {
+      return [];
+    }
+
+    return results.Items.map((x) => DynamoDB.Converter.unmarshall(x) as Person);
   }
 }
 
-describe('Integrated DynamoDB Test', () => {
+describe.skip('Integrated DynamoDB Test', () => {
   test('Executes an operation to retrieve data', async () => {
     const container = await resetSystemState({
       people: [

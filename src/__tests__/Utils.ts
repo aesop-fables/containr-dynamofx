@@ -1,12 +1,11 @@
 import { createContainer, IServiceContainer } from '@aesop-fables/containr';
 import AWS, { DynamoDB } from 'aws-sdk';
-import { CreateTableInput } from 'aws-sdk/clients/dynamodb';
-import { useDynamo } from '@aesop-fables/containr-dynamofx';
+import { useDynamo } from '..';
 
 class TableFactory {
   readonly tableName: string;
 
-  constructor(private readonly params: CreateTableInput) {
+  constructor(private readonly params: DynamoDB.Types.CreateTableInput) {
     this.tableName = params.TableName ?? '';
     if (!this.tableName || !this.tableName.length) {
       throw new Error('Table name not specified');
@@ -34,7 +33,7 @@ export interface SystemStateExpression {
 
 const TableName = 'DynamoFxTester';
 
-const params: CreateTableInput = {
+const params: DynamoDB.Types.CreateTableInput = {
   TableName,
   KeySchema: [
     {
@@ -126,13 +125,7 @@ export async function resetSystemState(expression: SystemStateExpression): Promi
   await resetDatabase();
   await executeExpression(expression);
 
-  const container = createContainer([
-    useDynamo({
-      core: {
-        endpoint,
-      },
-    }),
-  ]);
+  const container = createContainer([useDynamo({ endpoint })]);
 
   return container;
 }
