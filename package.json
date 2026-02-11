@@ -23,10 +23,13 @@
     "postversion": "git push && git push --tags"
   },
   "dependencies": {
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "typescript-eslint": "^8.55.0"
   },
   "devDependencies": {
     "@aesop-fables/containr": "^0.6.6",
+    "@aws-sdk/client-dynamodb": "^3.988.0",
+    "@aws-sdk/util-dynamodb": "^3.988.0",
     "@jest/globals": "^30.0.3",
     "@types/aws-lambda": "^8.10.110",
     "@types/jest": "^30.0.0",

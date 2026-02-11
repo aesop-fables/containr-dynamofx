@@ -65,9 +65,12 @@ const params: CreateTableInput = {
 
 const settingsFactory = new TableFactory(params);
 
-
 const endpoint = process.env.DYNAMO_DB_ENDPOINT || 'http://localhost:8000';
-const options: DynamoDBClientConfig = { endpoint, region: 'us-west-2', credentials: { accessKeyId: 'TEST', secretAccessKey: 'TEST' } };
+const options: DynamoDBClientConfig = {
+  endpoint,
+  region: 'us-west-2',
+  credentials: { accessKeyId: 'TEST', secretAccessKey: 'TEST' },
+};
 const dynamoDb = new DynamoDB(options);
 
 async function clearDatabase() {
@@ -88,27 +91,26 @@ export async function resetDatabase() {
 }
 
 async function savePerson(person: Person): Promise<void> {
-  await dynamoDb
-    .putItem({
-      TableName,
-      Item: {
-        pk: {
-          S: `PERSON#${person.id}`,
-        },
-        key: {
-          S: `PERSON#${person.id}#INFO`,
-        },
-        id: {
-          S: person.id,
-        },
-        firstName: {
-          S: person.firstName,
-        },
-        lastName: {
-          S: person.lastName,
-        },
+  await dynamoDb.putItem({
+    TableName,
+    Item: {
+      pk: {
+        S: `PERSON#${person.id}`,
       },
-    });
+      key: {
+        S: `PERSON#${person.id}#INFO`,
+      },
+      id: {
+        S: person.id,
+      },
+      firstName: {
+        S: person.firstName,
+      },
+      lastName: {
+        S: person.lastName,
+      },
+    },
+  });
 }
 
 export async function executeExpression(expression: SystemStateExpression): Promise<void> {
