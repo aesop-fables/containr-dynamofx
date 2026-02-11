@@ -1,20 +1,21 @@
 import 'reflect-metadata';
 import { inject } from '@aesop-fables/containr';
-import { DynamoDB } from 'aws-sdk';
 import { DynamoServices } from '../DynamoServices';
 import { IDynamoOperation } from '../IDynamoOperation';
 import { IDynamoService } from '../IDynamoService';
 import { Person, resetSystemState } from './Utils';
+import { DynamoDB } from '@aws-sdk/client-dynamodb';
+import { unmarshall } from '@aws-sdk/util-dynamodb';
 
 class ListAllPeople implements IDynamoOperation<Person[]> {
   constructor(@inject(DynamoServices.Client) private readonly dynamo: DynamoDB) {}
   async execute(): Promise<Person[]> {
-    const results = await this.dynamo.scan({ TableName: 'DynamoFxTester' }).promise();
+    const results = await this.dynamo.scan({ TableName: 'DynamoFxTester' });
     if (!results.Items) {
       return [];
     }
 
-    return results.Items.map((x) => DynamoDB.Converter.unmarshall(x) as Person);
+    return results.Items.map((x) => unmarshall(x) as Person);
   }
 }
 

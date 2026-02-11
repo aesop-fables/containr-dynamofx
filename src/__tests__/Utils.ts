@@ -1,11 +1,11 @@
 import { createContainer, IServiceContainer } from '@aesop-fables/containr';
-import AWS, { DynamoDB } from 'aws-sdk';
 import { useDynamo } from '..';
+import { CreateTableInput, DynamoDB, DynamoDBClientConfig } from '@aws-sdk/client-dynamodb';
 
 class TableFactory {
   readonly tableName: string;
 
-  constructor(private readonly params: DynamoDB.Types.CreateTableInput) {
+  constructor(private readonly params: CreateTableInput) {
     this.tableName = params.TableName ?? '';
     if (!this.tableName || !this.tableName.length) {
       throw new Error('Table name not specified');
@@ -13,11 +13,11 @@ class TableFactory {
   }
 
   async createTable(dynamoDb: DynamoDB): Promise<void> {
-    await dynamoDb.createTable(this.params).promise();
+    await dynamoDb.createTable(this.params);
   }
 
   async deleteTable(dynamoDb: DynamoDB): Promise<void> {
-    await dynamoDb.deleteTable({ TableName: this.tableName }).promise();
+    await dynamoDb.deleteTable({ TableName: this.tableName });
   }
 }
 
@@ -33,7 +33,7 @@ export interface SystemStateExpression {
 
 const TableName = 'DynamoFxTester';
 
-const params: DynamoDB.Types.CreateTableInput = {
+const params: CreateTableInput = {
   TableName,
   KeySchema: [
     {
@@ -65,11 +65,10 @@ const params: DynamoDB.Types.CreateTableInput = {
 
 const settingsFactory = new TableFactory(params);
 
-// TESTING ONLY
-AWS.config.update({ region: 'REGION' });
+
 const endpoint = process.env.DYNAMO_DB_ENDPOINT || 'http://localhost:8000';
-const options: DynamoDB.Types.ClientConfiguration = { endpoint };
-const dynamoDb = new AWS.DynamoDB(options);
+const options: DynamoDBClientConfig = { endpoint, region: 'us-west-2', credentials: { accessKeyId: 'TEST', secretAccessKey: 'TEST' } };
+const dynamoDb = new DynamoDB(options);
 
 async function clearDatabase() {
   try {
@@ -109,8 +108,7 @@ async function savePerson(person: Person): Promise<void> {
           S: person.lastName,
         },
       },
-    })
-    .promise();
+    });
 }
 
 export async function executeExpression(expression: SystemStateExpression): Promise<void> {

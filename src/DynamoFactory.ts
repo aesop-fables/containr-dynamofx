@@ -1,7 +1,7 @@
-import { DynamoDB } from 'aws-sdk';
+import { DynamoDB, DynamoDBClientConfig } from "@aws-sdk/client-dynamodb";
 
 export class DynamoFactory {
-  static createFullClient(configuration?: DynamoDB.Types.ClientConfiguration): DynamoDB {
+  static createFullClient(configuration?: DynamoDBClientConfig): DynamoDB {
     return new DynamoDB(configuration ?? {});
   }
 }
